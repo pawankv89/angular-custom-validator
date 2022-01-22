@@ -1,0 +1,48 @@
+<form [formGroup]="profileForm">
+    <label for="user-name">User Name: </label>
+    <input 
+    id="user-name"
+    type="text" 
+    formControlName="userName"
+    [class.is-invalid]="profileForm?.get('userName')?.invalid && profileForm?.get('userName')?.touched"
+    >
+    <p class="invalid-feedback" *ngIf="profileForm?.get('userName')?.errors?.duplicate">
+        Can't enter <b>User Name</b> with duplicate.
+    </p>
+    <br>
+    <br>
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="firstName">
+    <br>
+    <br>
+    <label for="last-name">Last Name: </label>
+    <input 
+    id="last-name"
+    type="text" 
+    formControlName="lastName"
+    [class.is-invalid]="profileForm?.get('lastName')?.invalid && profileForm?.get('lastName')?.touched"
+    >
+    <p class="invalid-feedback" *ngIf="profileForm?.get('lastName')?.errors?.cannotContainSpace">
+        Can't enter <b>Last Name</b> with space.
+    </p>
+    <br>
+    <br>
+    <label for="age">Age: </label>
+    <input id="age"
+    type="text"
+    formControlName="age"
+    [class.is-invalid]="profileForm?.get('age')?.invalid && profileForm?.get('age')?.touched"
+    >
+    <p class="invalid-feedback" *ngIf="profileForm?.get('age')?.errors?.ageRange">
+        Age should be in between 18 to 45 years.
+    </p>
+  
+  </form>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="profileForm.invalid">Submit</button>
+    <br>
+    <br>
+    <button type="button" (click)="onUpdateDuplicate()">Duplicate</button>
+  </form>
